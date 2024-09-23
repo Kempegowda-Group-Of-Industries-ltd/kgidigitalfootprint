@@ -1,35 +1,18 @@
-import os
-import streamlit as st
-
-# Set absolute path for the logo
-logo_path = os.path.join(os.getcwd(), "assets", "logo.png")
-
-# Display the logo
-st.image(logo_path, width=100)
-
-# Title of the app
-st.title("Digital Footprint Manager")
-
-# In case the local image doesn't work, you can display a placeholder image as fallback
-st.image("https://via.placeholder.com/150", width=100)
-
-
 import streamlit as st
 from scraper import track_online_presence
 from remover import request_data_removal
 from privacy_advisor import provide_privacy_tips
 
-# Set app configuration
-st.set_page_config(page_title="Digital Footprint Manager", page_icon="assets/logo.png")
+# Set up the page configuration
+st.set_page_config(page_title="Digital Footprint Manager")
 
-# App Title and Logo
-st.image("assets/logo.png", width=100)
+# App Title and Description
 st.title("Digital Footprint Manager")
 st.subheader("Track and Minimize Your Digital Footprint")
 
 # Sidebar for navigation
 st.sidebar.title("Menu")
-options = st.sidebar.radio("Go to", ['Track Online Presence', 'Data Removal', 'Privacy Tips'])
+options = st.sidebar.radio("Navigate", ['Track Online Presence', 'Data Removal', 'Privacy Tips'])
 
 # Track online presence
 if options == 'Track Online Presence':
@@ -39,9 +22,13 @@ if options == 'Track Online Presence':
     if st.button("Start Scan"):
         with st.spinner("Scanning..."):
             profiles = track_online_presence(email)
-        st.write("Detected Online Profiles:")
-        for profile in profiles:
-            st.write(f"- {profile['platform']}: {profile['link']}")
+        if profiles:
+            st.success("Online profiles found!")
+            st.write("Detected Online Profiles:")
+            for profile in profiles:
+                st.write(f"- {profile['platform']}: {profile['link']}")
+        else:
+            st.warning("No profiles found for this email.")
 
 # Data Removal Request
 elif options == 'Data Removal':
