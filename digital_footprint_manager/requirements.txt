@@ -1,0 +1,4 @@
+streamlit            # For the Streamlit web app
+requests             # For making HTTP requests to APIs (Facebook, Twitter, etc.)
+beautifulsoup4       # For web scraping (LinkedIn and other platforms without APIs)
+lxml                 # Parser for BeautifulSoup (for HTML parsing)
