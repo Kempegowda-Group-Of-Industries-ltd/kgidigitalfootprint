@@ -1,3 +1,19 @@
+import os
+import streamlit as st
+
+# Set absolute path for the logo
+logo_path = os.path.join(os.getcwd(), "assets", "logo.png")
+
+# Display the logo
+st.image(logo_path, width=100)
+
+# Title of the app
+st.title("Digital Footprint Manager")
+
+# In case the local image doesn't work, you can display a placeholder image as fallback
+st.image("https://via.placeholder.com/150", width=100)
+
+
 import streamlit as st
 from scraper import track_online_presence
 from remover import request_data_removal
